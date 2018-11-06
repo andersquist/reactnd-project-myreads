@@ -5,7 +5,13 @@ import ShelfMenu from "./ShelfMenu";
 class Book extends Component {
 
   static propTypes = {
-    book: PropTypes.object.isRequired
+    book: PropTypes.object.isRequired,
+    onShelfChange: PropTypes.func.isRequired
+  };
+
+  handleShelfChange = (shelf) => {
+    const { book, onShelfChange } = this.props;
+    onShelfChange(book, shelf);
   };
 
   render() {
@@ -23,7 +29,10 @@ class Book extends Component {
                 backgroundImage: `url("${book.imageLinks.thumbnail}")` }}>
 
             </div>
-            <ShelfMenu selectedShelf={book.shelf}/>
+            <ShelfMenu
+              selectedShelf={book.shelf}
+              onShelfChange={this.handleShelfChange}
+            />
           </div>
           <div className="book-title">{ book.title }</div>
           <div className="book-authors">{ authors }</div>

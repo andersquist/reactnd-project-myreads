@@ -4,11 +4,14 @@ import * as Const from './constants';
 
 class ShelfMenu extends Component {
   static propTypes = {
-    selectedShelf: PropTypes.string.isRequired
+    selectedShelf: PropTypes.string.isRequired,
+    onShelfChange: PropTypes.func.isRequired
   };
 
   handleChange = (event) => {
+    const { onShelfChange } = this.props;
     console.log(event.target.value);
+    onShelfChange(event.target.value);
   };
 
   render() {

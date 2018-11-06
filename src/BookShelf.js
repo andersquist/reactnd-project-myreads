@@ -6,16 +6,20 @@ class BookShelf extends Component {
 
   static propTypes = {
     title: PropTypes.string.isRequired,
-    books: PropTypes.array
+    books: PropTypes.array,
+    onShelfChange: PropTypes.func.isRequired
   };
 
   render() {
-    const { title, books } = this.props;
+    const { title, books, onShelfChange } = this.props;
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{title}</h2>
         <div className="bookshelf-books">
-          <BooksGrid books={books}/>
+          <BooksGrid
+            books={books}
+            onShelfChange={onShelfChange}
+          />
         </div>
       </div>
     )

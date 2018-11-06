@@ -7,11 +7,12 @@ import * as Const from './constants';
 class ListBooks extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    books: PropTypes.array
+    books: PropTypes.array,
+    onShelfChange: PropTypes.func.isRequired
   };
 
   render() {
-    const { title, books } = this.props;
+    const { title, books, onShelfChange } = this.props;
     const currentlyReading = books
       .filter( ({ shelf }) => shelf === Const.CURRENTLY_READING);
     const wantToRead = books
@@ -25,9 +26,21 @@ class ListBooks extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <BookShelf title="Currently Reading" books={currentlyReading}/>
-            <BookShelf title="Want to Read" books={wantToRead}/>
-            <BookShelf title="Read" books={read}/>
+            <BookShelf
+              title="Currently Reading"
+              books={currentlyReading}
+              onShelfChange={onShelfChange}
+            />
+            <BookShelf
+              title="Want to Read"
+              books={wantToRead}
+              onShelfChange={onShelfChange}
+            />
+            <BookShelf
+              title="Read"
+              books={read}
+              onShelfChange={onShelfChange}
+            />
           </div>
         </div>
         <div className="open-search">
