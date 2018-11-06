@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
+import * as Const from './constants';
 
 class ShelfMenu extends Component {
   static propTypes = {
@@ -20,10 +20,10 @@ class ShelfMenu extends Component {
           onChange={this.handleChange}
         >
           <option value="move" disabled>Move to...</option>
-          <option value="currentlyReading">Currently Reading</option>
-          <option value="wantToRead">Want to Read</option>
-          <option value="read">Read</option>
-          <option value="none">None</option>
+          <option value={Const.CURRENTLY_READING}>Currently Reading</option>
+          <option value={Const.WANT_TO_READ}>Want to Read</option>
+          <option value={Const.READ}>Read</option>
+          <option value={Const.NONE}>None</option>
         </select>
       </div>
     )
