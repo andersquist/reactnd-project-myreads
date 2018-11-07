@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import * as Const from './constants';
+import * as Const from '../constants';
 
 class ShelfMenu extends Component {
   static propTypes = {

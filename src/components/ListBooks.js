@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import BookShelf from "./BookShelf";
-import * as Const from './constants';
+import * as Const from '../constants';
 
 class ListBooks extends Component {
   static propTypes = {
