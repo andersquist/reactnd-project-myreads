@@ -7,7 +7,8 @@ import PropTypes from "prop-types";
 class SearchBooks extends Component {
 
   static propTypes = {
-    onShelfChange: PropTypes.func.isRequired
+    onShelfChange: PropTypes.func.isRequired,
+    shelves: PropTypes.array.isRequired
   };
 
   state = {
@@ -32,12 +33,18 @@ class SearchBooks extends Component {
   };
 
   queryBooks = (query) => {
+    const { shelves } = this.props;
     BooksAPI.search(query)
       .then((books) => {
 
         // Handle 403s and other errors
         if (books !== undefined && Array.isArray(books)) {
-          //TODO: Set shelf if book is already in one
+
+          books.forEach((book) => {
+            const bookShelf = shelves.find((b) => (b.id === book.id));
+            book.shelf = bookShelf !== undefined ? bookShelf.shelf : 'none';
+          });
+
           this.setState({
             books: books
           });

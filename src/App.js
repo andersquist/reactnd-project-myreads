@@ -31,6 +31,13 @@ class BooksApp extends React.Component {
       });
   };
 
+  getShelvesBookIds = (books) => (
+      books.map((book) => ({
+        id: book.id,
+        shelf: book.shelf
+      }))
+  );
+
   render() {
     const { books } = this.state;
     return (
@@ -43,7 +50,9 @@ class BooksApp extends React.Component {
           }/>
           <Route path='/search' render={() => (
             <SearchBooks
-              onShelfChange={this.handleShelfChange}/>
+              onShelfChange={this.handleShelfChange}
+              shelves={this.getShelvesBookIds(books)}
+            />
           )}/>
         </Switch>
       </div>
