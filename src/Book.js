@@ -16,7 +16,7 @@ class Book extends Component {
 
   render() {
     const { book } = this.props;
-    const authors = book.authors.join(', ');
+    const authors = book.authors && book.authors.join(', ');
     return (
       <li>
         <div className="book">
@@ -30,7 +30,7 @@ class Book extends Component {
 
             </div>
             <ShelfMenu
-              selectedShelf={book.shelf}
+              selectedShelf={book.shelf ? book.shelf : 'none'}
               onShelfChange={this.handleShelfChange}
             />
           </div>

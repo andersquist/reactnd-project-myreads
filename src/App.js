@@ -4,7 +4,6 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 import ListBooks from "./ListBooks";
 import SearchBooks from "./SearchBooks";
-import * as Const from './constants';
 
 class BooksApp extends React.Component {
 
@@ -19,32 +18,14 @@ class BooksApp extends React.Component {
       });
   }
 
-  filterAndUpdateShelf = (books, ids, newShelf) => {
-    return books
-      .filter( ({ id }) => (ids.includes(id)))
-      .map((book) => {
-        const { shelf, ...rest } = book;
-        return {
-          ...rest,
-          shelf: newShelf
-        }
-      });
-  };
-
   handleShelfChange = (book, shelf) => {
     BooksAPI.update(book, shelf)
       .then((shelves) => {
-        console.log('server response:', shelves);
         this.setState((currentState) => {
-          const { books } = currentState;
-          const currentlyReading = this.filterAndUpdateShelf(
-            books, shelves.currentlyReading, Const.CURRENTLY_READING);
-          const wantToRead = this.filterAndUpdateShelf(
-            books, shelves.wantToRead, Const.WANT_TO_READ);
-          const read = this.filterAndUpdateShelf(
-            books, shelves.read, Const.READ);
+          book.shelf = shelf;
           return {
-            books: [...currentlyReading, ...wantToRead, ...read]
+            books: [...currentState.books.filter( b => b.id !== book.id) ,
+              book]
           }
         });
       });
@@ -55,13 +36,15 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Switch>
-          <Route exact path='/' render={() =>(
-            <ListBooks
+          <Route exact path='/' render={() =>(<ListBooks
               title="MyReads"
               books={books}
+              onShelfChange={this.handleShelfChange}/>)
+          }/>
+          <Route path='/search' render={() => (
+            <SearchBooks
               onShelfChange={this.handleShelfChange}/>
           )}/>
-          <Route path='/search' component={SearchBooks}/>
         </Switch>
       </div>
     )
