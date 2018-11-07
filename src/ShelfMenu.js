@@ -10,7 +10,6 @@ class ShelfMenu extends Component {
 
   handleChange = (event) => {
     const { onShelfChange } = this.props;
-    console.log(event.target.value);
     onShelfChange(event.target.value);
   };
 
