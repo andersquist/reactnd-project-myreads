@@ -16,7 +16,9 @@ class Book extends Component {
 
   render() {
     const { book } = this.props;
-    const authors = book.authors && book.authors.join(', ');
+    const authors = book.authors ? book.authors.join(', ') : '';
+    const thumbnail = book.imageLinks && book.imageLinks.thumbnail ?
+      book.imageLinks.thumbnail : '';
     return (
       <li>
         <div className="book">
@@ -26,7 +28,7 @@ class Book extends Component {
               style={{
                 width: 128,
                 height: 193,
-                backgroundImage: `url("${book.imageLinks.thumbnail}")` }}>
+                backgroundImage: `url("${thumbnail}")` }}>
 
             </div>
             <ShelfMenu
