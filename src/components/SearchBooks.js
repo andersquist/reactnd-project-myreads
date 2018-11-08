@@ -17,24 +17,23 @@ class SearchBooks extends Component {
   };
 
   updateQuery = (query) => {
-    const trimmedQuery = query.trim();
     this.setState((currentState) => {
-      return trimmedQuery !== '' ? {
-        query: trimmedQuery
+      return query.trim() !== '' ? {
+        query: query
         } : {
         query: '',
         books: []
       }
     });
     //TODO: add debounce
-    if (trimmedQuery !== '') {
-      this.queryBooks(trimmedQuery);
+    if (query.trim() !== '') {
+      this.queryBooks(query);
     }
   };
 
   queryBooks = (query) => {
     const { shelves } = this.props;
-    BooksAPI.search(query)
+    BooksAPI.search(query.trim())
       .then((books) => {
 
         // Handle 403s and other errors
@@ -48,6 +47,10 @@ class SearchBooks extends Component {
           this.setState({
             books: books
           });
+        } else if (books !== undefined && books.error !== undefined) {
+          this.setState({
+            books: []
+          })
         }
       });
   };
