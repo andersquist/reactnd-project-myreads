@@ -1,8 +1,11 @@
+const CURRENTLY_READING = 'currentlyReading';
+const WANT_TO_READ = 'wantToRead';
+const READ = 'read';
+const NONE = 'none';
 
-export const CURRENTLY_READING = 'currentlyReading';
-
-export const WANT_TO_READ = 'wantToRead';
-
-export const READ = 'read';
-
-export const NONE = 'none';
+export {
+  CURRENTLY_READING,
+  WANT_TO_READ,
+  READ,
+  NONE
+};
